@@ -1,5 +1,5 @@
-const API_BASE = "http://localhost:4003/api";
-const APP_BASE = "http://localhost:4003";
+const API_BASE = window.location.origin + "/api";
+const APP_BASE = window.location.origin;
 const TOKEN_KEY = "cms_token";
 const USER_KEY = "cms_user";
 

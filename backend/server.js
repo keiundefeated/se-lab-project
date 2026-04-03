@@ -79,7 +79,11 @@ async function startServer() {
   });
 }
 
-startServer().catch((error) => {
-  console.error("Failed to start the College Management System server.", error);
-  process.exit(1);
-});
+if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+  startServer().catch((error) => {
+    console.error("Failed to start the College Management System server.", error);
+    process.exit(1);
+  });
+}
+
+module.exports = { app, initializeDatabase };
