@@ -3,10 +3,14 @@ const path = require("path");
 const bcrypt = require("bcryptjs");
 const initSqlJs = require("sql.js");
 
-const databaseDir = path.join(__dirname, "..", "..", "database");
+const databaseDir = process.env.VERCEL
+  ? "/tmp"
+  : path.join(__dirname, "..", "..", "database");
 const databasePath = path.join(databaseDir, "cms.db");
-const schemaPath = path.join(databaseDir, "cms.sql");
-const uploadsDir = path.join(__dirname, "..", "uploads");
+const schemaPath = path.join(__dirname, "..", "..", "database", "cms.sql");
+const uploadsDir = process.env.VERCEL
+  ? "/tmp/uploads"
+  : path.join(__dirname, "..", "uploads");
 
 if (!fs.existsSync(databaseDir)) {
   fs.mkdirSync(databaseDir, { recursive: true });
