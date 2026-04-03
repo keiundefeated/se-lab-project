@@ -839,7 +839,7 @@ async function initializeDatabase() {
   }
 
   const SQL = await initSqlJs({
-    locateFile: (file) => path.join(__dirname, "..", "..", "node_modules", "sql.js", "dist", file)
+    locateFile: (file) => `https://sql.js.org/dist/${file}`
   });
 
   const existingBuffer =

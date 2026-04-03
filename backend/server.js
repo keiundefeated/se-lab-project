@@ -21,7 +21,9 @@ const academicRoutes = require("./routes/academicRoutes");
 const app = express();
 const PORT = Number(process.env.PORT) || 4003;
 const frontendDir = path.join(__dirname, "..", "frontend");
-const uploadsDir = path.join(__dirname, "uploads");
+const uploadsDir = process.env.VERCEL === "1"
+  ? "/tmp/uploads"
+  : path.join(__dirname, "uploads");
 
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
@@ -79,7 +81,7 @@ async function startServer() {
   });
 }
 
-if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+if (process.env.VERCEL !== "1") {
   startServer().catch((error) => {
     console.error("Failed to start the College Management System server.", error);
     process.exit(1);
